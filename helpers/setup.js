@@ -1,8 +1,8 @@
 const sdk = require('node-appwrite');
 const config = {
-  project: '5d8fa6deefd05',
-  endpoint: 'https://localhost/v1',
-  key: '1589eb89e0c0153892c68867ea44137581a7a91390668ab1966a9c3a30a4d9ace58de90b3eaf61c0eae3f35e886b3d01cc8a674caf630c25a4428021ba0697cca5047b42bafb6710911e88fb1553d2833a221a94d2dc6fb55b7e500bc7873c4f09aab939e47aa959d55a972beacec8f7b86852b6842f4ca606908dea9d1cc7df',
+  project: 'test',
+  endpoint: 'http://localhost/v1',
+  key: 'd6606c6505f40a36c796193164e8afb9e6c51dba58c19ac0db2c6504de306fa1f4b92ea59a756d022a2ce6088c98e1d6da3817a6059db50bf4a6b8f6fb2e03324fb6e764208b0fa6a5ee4814386ff689064bb919d4eecd2a5dea63845994ecfa56493fb7425205f0d442ae8d66fe04e11e6996763f349e070ce4367a71990c6f',
 };
 
 // Init SDK

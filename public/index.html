@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Appwrite Playground</title>
+    <title>Appwrite Teams Playground</title>
     <meta name="description" content="A simple Appwrite demo app for gettig started with API integration" />
     <meta name="author" content="Appwrite Team" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -34,12 +34,9 @@
         <div class="container">
             <h1 class="display-5 mb-5">Hello Appwriters!</h1>
             <p class="lead">
-                Appwrite playground is a simple way to explore the Appwrite API & Web
-                SDK. Use the
-                <a href="https://github.com/appwrite/playground-for-js/blob/master/public/index.html"
-                    target="_blank">source code</a>
-                of this page to learn how to use the different Appwrite Web SDK
-                features.
+                This special edition of Appwrite Playground allows you to play with Teams and permissions using teams!
+                Learn how to use the different Appwrite Web SDK
+                features for Appwrite Teams!.
             </p>
         </div>
     </div>
@@ -50,48 +47,45 @@
         <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="isLogged()">
             Is Logged?
         </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="loginAnonymously()">
-            Login Anonymously
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="loginWithGoogle()">
-            Login With Google
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="loginWithFacebook()">
-            Login With Facebook
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="loginWithGithub()">
-            Login With Github
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="loginWithApple()">
-            Login With Apple
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="createJWT()">
-            Create JWT
-        </button>
         <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getUserName()">
             Get User Name
         </button>
         <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getUserEmail()">
             Get User Email
         </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getSessions()">
-            Get User Sessions
+        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getUserTeam()">
+            Get User Team
         </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getLogs()">
-            Get User Logs
+        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="acceptInvite()">
+            Accept Invite
         </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="deleteSessions()">
-            Delete All Sessions
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="deleteCurrentSession()">
-            Delete Current Session
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="createTeam()">
-            Create Team
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="createTeamMembership()">
-            Create Team Membership
-        </button>
+        <hr class="mb-5" />
+
+        <h3 class="mb-4">Send Reset Password Email</h3>
+        <form onsubmit="sendRecover(event);">
+            <div class="form-group">
+                <label for="recover-email">Email</label>
+                <input type="email" class="form-control" id="recover-email" placeholder="Enter email"
+                    value="demo@example.com" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Send Reset Email</button>
+        </form>
+        <hr class="mb-5" />
+
+        <h3 class="mb-4">Reset Password</h3>
+        <form onsubmit="recover(event);">
+            <div class="form-group">
+                <label for="recover-password">Password</label>
+                <input type="password" class="form-control" id="recover-password" placeholder="Password"
+                    value="password" required pattern=".{6,}" title="Six or more characters" />
+            </div>
+            <div class="form-group">
+                <label for="recover-confirm-password">Confirm Password</label>
+                <input type="password" class="form-control" id="recover-confirm-password" placeholder="Confirm Password"
+                    value="password" required pattern=".{6,}" title="Six or more characters" />
+            </div>
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+        </form>
     </div>
 
     <hr class="mb-5" />
@@ -133,78 +127,89 @@
         </div>
     </div>
 
-    <hr class="mb-5" />
-
     <div class="container">
-        <h2 class="mb-5">Storage</h2>
         <div class="row">
             <div class="col-sm mb-5">
-                <h3 class="mb-4">Add File</h3>
-                <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="uploader" aria-describedby="inputGroupFileAddon04">
-                      <label class="custom-file-label" id="uploader-label" for="inputGroupFile04">Choose file</label>
+                <h3 class="mb-4">Create Team</h3>
+                <form onsubmit="createTeam(event);">
+                    <div class="form-group">
+                        <label for="create-team-name">Name</label>
+                        <input type="text" class="form-control" id="create-team-name" placeholder="cool team name"
+                            value="cool team name"/>
                     </div>
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button" id="inputGroupFileAddon04" onclick="createFile()">Upload File</button>
+                    <div class="form-group">
+                        <label for="create-team-id">ID</label>
+                        <input type="text" class="form-control" id="create-team-id" placeholder="cool-team-id"
+                            value="cool-team-id"/>
                     </div>
-                  </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
             </div>
             <div class="col-sm mb-5">
-                <h3 class="mb-4">List Files</h3>
-                <button type="button" class="btn btn-primary" onclick="listFiles()">
-                    List Files
-                </button>
-                <div class="container mt-3">
-                    <div class="row">
-                        <ul id="list"></ul>
+                <h3 class="mb-4">Invite to Team</h3>
+                <form onsubmit="invite(event);">
+                    <div class="form-group">
+                        <label for="invite-team-id">Team ID</label>
+                        <input type="text" class="form-control" id="invite-team-id" placeholder="cool-team-id"
+                            value="cool-team-id"/>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="invite-team-email">Email</label>
+                        <input type="text" class="form-control" id="invite-team-email" placeholder=""
+                            value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label for="invite-team-roles">Roles</label>
+                        <input type="text" class="form-control" id="invite-team-roles" placeholder="role1, role2"
+                            value="role1, role2" title="separate roles by commas"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Invite</button>
+                </form>
             </div>
         </div>
+        <div class="container">
+            <div class="mb-5">
+                <h2 class="mb-5">Add File</h2>
+                <form onsubmit="createFile(event);">
+                    <div class="form-group">
+                        <label for="create-file-team">Team</label>
+                        <input type="text" class="form-control" id="create-file-team" placeholder="cool-team-name"
+                            value="cool-team-name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-file-role">Role</label>
+                        <input type="text" class="form-control" id="create-file-role" placeholder="role1"
+                            value="role1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="uploadFile">File</label>
+                        <input type="file" class="form-control-file" id="create-file">
+                      </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
 
-
-    <hr class="mb-5" />
-
-    <div class="container">
-        <h2 class="mb-5">Realtime</h2>
-        <p>Create files in the Storage service to see them listed here in realtime.</p>
-        <ul id="realtime" class="list-group" />
+            <h2 class="mb-5">Realtime</h2>
+            <p>Create files in the Storage service to see them listed here in realtime.</p>
+            <ul id="realtime" class="list-group" />
+        </div>
     </div>
 
-    <hr class="mb-5" />
-
-    <div class="container">
-        <h2 class="mb-5">Locale</h2>
-
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getLocation()">
-            Get User Location
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="getIP()">
-            Get User IP
-        </button>
-        <button type="button" class="btn btn-primary btn-lg mr-4 mb-4" onclick="isEU()">
-            Is User a Member of the EU?
-        </button>
-    </div>
 
     <!-- Include Appwrite Web SDK before trying to create a new instance -->
 
     <!-- Fetch the latest sdk or use an existing one -->
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@7.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@8.0.1"></script>
 
     <script>
 
-        document.getElementById('uploader').onchange = function () {
-            document.getElementById('uploader-label').innerHTML = this.files[0].name;
-        };
 
         // Before we start doing anything, we need to init our Appwrite Web SDK
         const appwrite = new Appwrite();
 
         appwrite
             .setEndpoint("http://localhost/v1") // Set your own appwrite server endpoint here, if not sure, you can get this value from your project settings page.
-            .setProject("62387717329626ff1d5a"); // Your Appwrite Project UID, you can get it from your project settings page.
+            .setProject("teams-demo"); // Your Appwrite Project UID, you can get it from your project settings page.
 
         /**
          * Please Note!
@@ -214,20 +219,6 @@
          * like electron, XBOX and others.
          */
 
-        const realtimeElement = document.getElementById("realtime");
-
-        appwrite.subscribe("files", function(response) {
-            const entry = document.createElement("li");
-            const image = appwrite.storage.getFilePreview('testbucket', response.payload.$id, 250);
-            const url = appwrite.storage.getFileView('testbucket', response.payload.$id, 250);
-            entry.classList.add('list-group-item');
-            entry.innerHTML = `<a href="${url}" target=_blank><b>Event</b>: ${response.event}<br><img src="${image}" /></a>`;
-            realtimeElement.prepend(entry);
-        });
-
-        appwrite.subscribe(['teams', 'memberships', 'accounts'], function(response) {
-            console.log(response)
-        });
 
         function isLogged() {
             let promise = appwrite.account.get();
@@ -268,17 +259,13 @@
             );
         }
 
-        function getSessions() {
-            let promise = appwrite.account.getSessions();
+        function getUserTeam() {
+            let promise = appwrite.teams.list();
 
             promise.then(
                 function (response) {
-                    console.log("User Devices:", response);
-                    alert(
-                        "User has " +
-                        response.sum +
-                        " active sessions. Check developer console for more info"
-                    );
+                    console.log(JSON.stringify(response.teams));
+                    alert(response);
                 },
                 function (error) {
                     alert("No User is Logged!");
@@ -286,20 +273,38 @@
             );
         }
 
-        function getLogs() {
-            let promise = appwrite.account.getLogs();
+
+        function createTeam(event) {
+            event.preventDefault();
+            const id = event.target.elements["create-team-id"].value
+            const name = event.target.elements["create-team-name"].value
+            let promise = appwrite.teams.create(id, name);
 
             promise.then(
                 function (response) {
-                    console.log("User Logs:", response);
-                    alert(
-                        "User has " +
-                        response.logs.length +
-                        " logs. Check developer console for more info"
-                    );
+                    console.log("Team created."); // Success
                 },
                 function (error) {
-                    alert("No User is Logged!");
+                    console.log(error); // Failure
+                }
+            );
+        }
+
+        function invite(event) {
+            event.preventDefault();
+
+            let email = event.target.elements["invite-team-email"].value;
+            let id = event.target.elements["invite-team-id"].value;
+            let roles = event.target.elements["invite-team-roles"].value.split(/[ ,]+/);
+
+            let promise = appwrite.teams.createMembership(id, email, roles, 'http://localhost:8000');
+
+            promise.then(
+                function (response) {
+                    console.log("Membership created."); // Success
+                },
+                function (error) {
+                    console.log(error); // Failure
                 }
             );
         }
@@ -323,29 +328,6 @@
                 );
         }
 
-        function loginAnonymously() {
-            appwrite.account.createAnonymousSession().then(
-                function (response) {
-                    alert("anonymous session created successfully!");
-                },
-                function (error) {
-                    alert("failed to create session");
-                }
-            );
-        }
-
-        function createJWT() {
-            appwrite.account.createJWT().then(
-                function (response) {
-                    console.log("JWT: ", response);
-                    alert("JWT created.");
-                },
-                function (error) {
-                    alert("failed to create session");
-                }
-            );
-        }
-
         function login(event) {
             event.preventDefault();
             appwrite.account
@@ -367,157 +349,23 @@
                 );
         }
 
-        function loginWithGoogle(event) {
+        const realtimeElement = document.getElementById("realtime");
+
+        appwrite.subscribe("files", function(response) {
+            const entry = document.createElement("li");
+            const image = appwrite.storage.getFilePreview('testbucket', response.payload.$id, 250);
+            const url = appwrite.storage.getFileView('testbucket', response.payload.$id, 250);
+            entry.classList.add('list-group-item');
+            entry.innerHTML = `<a href="${url}" target=_blank><b>Event</b>: ${response.event}<br><img src="${image}" /></a>`;
+            realtimeElement.prepend(entry);
+        });
+
+        function createFile(event) {
             event.preventDefault();
-            /**
-             * Callback URLs are required for creating a browser
-             *  session cookie due to some browsers 3rd party cookie policy limitations,
-             *  this is not required for other client based platforms
-             */
-            let promise = appwrite.account.createOAuth2Session(
-                "google",
-                "http://localhost:8000/?success", // Callback URL for success
-                "http://localhost:8000/?failure" // Callback URL for failure
-            );
 
-            promise.then(
-                function (response) {
-                    console.log(response); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function loginWithFacebook(event) {
-            event.preventDefault();
-            /**
-             * Callback URLs are required for creating a browser
-             *  session cookie due to some browsers 3rd party cookie policy limitations,
-             *  this is not required for other client based platforms
-             */
-            let promise = appwrite.account.createOAuth2Session(
-                "facebook",
-                "http://localhost:8000/?success", // Callback URL for success
-                "http://localhost:8000/?failure", // Callback URL for failure
-                ["user_location"]
-            );
-
-            promise.then(
-                function (response) {
-                    console.log(response); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function loginWithGithub(event) {
-            event.preventDefault();
-            /**
-             * Callback URLs are required for creating a browser
-             *  session cookie due to some browsers 3rd party cookie policy limitations,
-             *  this is not required for other client based platforms
-             */
-            let promise = appwrite.account.createOAuth2Session(
-                "github",
-                "http://localhost:8000/?success", // Callback URL for success
-                "http://localhost:8000/?failure", // Callback URL for failure
-                []
-            );
-
-            promise.then(
-                function (response) {
-                    console.log(response); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function loginWithApple(event) {
-            event.preventDefault();
-            /**
-             * Callback URLs are required for creating a browser
-             *  session cookie due to some browsers 3rd party cookie policy limitations,
-             *  this is not required for other client based platforms
-             */
-            let promise = appwrite.account.createOAuth2Session(
-                "apple",
-                "http://localhost:8000/?success", // Callback URL for success
-                "http://localhost:8000/?failure" // Callback URL for failure
-            );
-
-            promise.then(
-                function (response) {
-                    console.log(response); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function deleteSessions() {
-            let promise = appwrite.account.deleteSessions();
-
-            promise.then(
-                function (response) {
-                    console.log("All session deleted."); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function deleteCurrentSession() {
-            let promise = appwrite.account.deleteSession('current');
-
-            promise.then(
-                function (response) {
-                    console.log("Current session deleted."); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function createTeam() {
-            let promise = appwrite.teams.create('test', 'Test Team');
-
-            promise.then(
-                function (response) {
-                    console.log("Team created."); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function createTeamMembership() {
-            let random = Math.floor(1000 + Math.random() * 9000);
-            let email = "test+" + random + "@test.com";
-            let promise = appwrite.teams.createMembership('test', email, ['admin'], 'http://localhost');
-
-            promise.then(
-                function (response) {
-                    console.log("Membership created."); // Success
-                },
-                function (error) {
-                    console.log(error); // Failure
-                }
-            );
-        }
-
-        function createFile() {
-            let promise = appwrite.storage.createFile('testbucket', 'unique()', document.getElementById('uploader').files[0]);
-
+            let role = "team:" +  event.target.elements["create-file-team"].value + event.target.elements["create-file-role"].value;
+            let promise = appwrite.storage.createFile('default', 'unique()', document.getElementById('create-file').files[0], [role]);
+            
             promise.then(function (response) {
                 console.log(response); // Success
                 alert("File uploaded successfully");
@@ -526,107 +374,41 @@
             });
         }
 
-        function listFiles() {
-            let promise = appwrite.storage.listFiles('testbucket');
-
-            promise.then(function (response) {
-                var ul = document.getElementById("list");
-                ul.innerHTML = '';
-                for(let i=1; i<=response.sum; i++){
-                    var li = document.createElement("li");
-                    li.innerHTML = response.files[i-1].name;
-                    console.log(response.files[i-1].$id);
-                    li.onclick = function () { 
-                        getFile(response.files[i-1].$id);
-                    };
-                    ul.appendChild(li);
-                }
-                console.log(response); // Success
-            }, function (error) {
-                console.log(error); // Failure
+        function sendRecover(event) {
+            event.preventDefault();
+            const email = event.target.elements["recover-email"].value;
+            appwrite.account.createRecovery(email, 'http://localhost:8000').then(r=>{
+                console.log("Sent Recovery Email")
             });
         }
 
-        function getFile(file_id) {
-            let promise = appwrite.storage.getFile('testbucket', file_id);
+        function recover(event) {
+            event.preventDefault();
 
-            promise.then(function (response) {
-                alert(JSON.stringify(response, undefined, 2));
-                console.log(response); // Success
-            }, function (error) {
-                console.log(error); // Failure
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
             });
+            const [userId, secret, pass, confirmPass] = [params.userId, params.secret, event.target.elements["recover-password"].value, event.target.elements["recover-confirm-password"].value];
+
+            appwrite.account.updateRecovery(userId, secret, pass, confirmPass).then((res)=>{
+                console.log("Reset Success!")
+            })
+
         }
 
-        function getLocation() {
-            let promise = appwrite.locale.get();
 
-            promise.then(
-                function (response) {
-                    alert(
-                        "User is from " +
-                        response.country +
-                        ", country code is: " +
-                        response.countryCode
-                    );
-                },
-                function (error) {
-                    alert("No User is Logged!");
-                }
-            );
+        function acceptInvite() {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            const [userId, membershipId, teamId, secret] = [params.userId, params.membershipId, params.teamId, params.secret];
+            console.log([userId, membershipId, teamId, secret])
+
+            appwrite.teams.updateMembershipStatus(teamId, membershipId, userId, secret).then(r=>{
+                console.log("Accepted Invite")
+            });
+
         }
-
-        function getIP() {
-            let promise = appwrite.locale.get();
-
-            promise.then(
-                function (response) {
-                    alert("User IP is: " + response.ip);
-                },
-                function (error) {
-                    alert("Failed to get user locale.");
-                }
-            );
-        }
-
-        function isEU() {
-            let promise = appwrite.locale.get();
-
-            promise.then(
-                function (response) {
-                    alert(
-                        response.eu
-                            ? "User is a member of the EU"
-                            : "User is not a member of the EU"
-                    );
-                },
-                function (error) {
-                    alert("Failed to get user locale.");
-                }
-            );
-        }
-
-      // let promise = appwrite.database.createDocument('5dac4fc8d9f0c', {
-      //     'completed': true,
-      //     'text': 'a new task',
-      // }, ['*'], ['*']);
-
-      // let promise = appwrite.database.createDocument('5dac4fc8d9f0c', {
-      //     'completed': true,
-      //     'text': 'a new task',
-      // });
-
-      // let promise = appwrite.database.createDocument('5dac4fc8d9f0c', {
-      //     'completed': true,
-      //     'text': 'a new task',
-      // }, ['user:{self}'], ['user:{self}']);
-
-      // console.log('[INFO] Adding Todo');
-      // promise.then(function(response) {
-      //     console.log(response);
-      // }, function(error) {
-      //     console.log(error);
-      // });
     </script>
 </body>
 
